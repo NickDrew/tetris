@@ -5,17 +5,18 @@ import styles from "./cellGridstyle.module.css"
 export interface CellGridProps {
     rows: number;
     cols: number
-    color: number
+    defaultColor: number
+    colorGrid: number[][]
 }
 
 export const CellGrid: React.FC<CellGridProps> = (props) => {
-    const { rows, cols, color } = props;
+    const { rows, cols, defaultColor, colorGrid } = props;
 
     const grid: ReactElement[][] = []
     for (let row = 0; row < rows; row++) {
         grid.push([])
         for (let col = 0; col < cols; col++) {
-            grid[row].push(<Cell key={`${col}${row}`} color={color} />)
+            grid[row].push(<Cell key={`${col}${row}`} color={colorGrid[col][row] ? colorGrid[col][row] : defaultColor} />)
         }
     }
 
