@@ -1,0 +1,38 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "A simple tetris game in react",
+  "main": "src/index.tsx",
+  "scripts": {
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickDrew/tetris.git"
+  },
+  "keywords": [
+    "tetris",
+    "react",
+    "typescript"
+  ],
+  "author": "Nicholas Drew",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NickDrew/tetris/issues"
+  },
+  "homepage": "https://github.com/NickDrew/tetris#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  }
+}
