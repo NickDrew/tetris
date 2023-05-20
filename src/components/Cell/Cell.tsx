@@ -6,7 +6,7 @@ export interface ICellProps {
 }
 
 export const Cell: React.FC<ICellProps> = (props) => {
-    const colorClass = `color_${props.color}`
+    const colorClass = `color${props.color}`
     const classes = `${styles.cell} ${styles[colorClass]}`
     return <div className={classes} />
 }
