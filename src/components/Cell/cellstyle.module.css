@@ -1,0 +1,42 @@
+.cell {
+    border-style: solid;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-width: var(--cell-border-width);
+    border-left-color: var(--cell-border-left-color);
+    border-top-color: var(--cell-border-top-color);
+    border-right-color: var(--cell-border-right-color);
+    border-bottom-color: var(--cell-border-bottom-color);
+}
+
+.color_0 {
+    background-color: var(--cell-color-0);
+}
+
+.color_1 {
+    background-color: var(--cell-color-1);
+}
+
+.color_2 {
+    background-color: var(--cell-color-2);
+}
+
+.color_3 {
+    background-color: var(--cell-color-3);
+}
+
+.color_4 {
+    background-color: var(--cell-color-4);
+}
+
+.color_5 {
+    background-color: var(--cell-color-5);
+}
+
+.color_6 {
+    background-color: var(--cell-color-6);
+}
+
+.color_7 {
+    background-color: var(--cell-color-7);
+}

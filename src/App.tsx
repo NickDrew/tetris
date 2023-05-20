@@ -1,9 +1,10 @@
 import React from 'react';
+import { Cell } from './components/Cell/Cell';
 
 const App: React.FC = () => {
     return (
         <div>
-            <h1>Tetris placeholder</h1>
+            <Cell color={3} />
         </div>
     );
 };
