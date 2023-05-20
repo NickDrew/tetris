@@ -4,7 +4,7 @@ import { CellGrid } from './components/CellGrid/CellGrid';
 const App: React.FC = () => {
     return (
         <div>
-            <CellGrid />
+            <CellGrid rows={18} cols={10} color={0} />
         </div>
     );
 };
