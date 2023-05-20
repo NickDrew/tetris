@@ -1,10 +1,10 @@
 import React from 'react';
-import { Cell } from './components/Cell/Cell';
+import { CellGrid } from './components/CellGrid/CellGrid';
 
 const App: React.FC = () => {
     return (
         <div>
-            <Cell color={3} />
+            <CellGrid />
         </div>
     );
 };

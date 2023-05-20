@@ -1,0 +1,6 @@
+.cellgrid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), var(--cell-size));
+    grid-gap: 0;
+    align-self: flex-start;
+}

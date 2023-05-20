@@ -17,4 +17,8 @@
 
     --cell-size: 20px;
     --cell-border-width: 5px;
+
+    /*cell grid styles*/
+    --cols: 10;
+    --rows: 18;
 }
