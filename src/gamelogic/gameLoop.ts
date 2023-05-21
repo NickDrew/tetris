@@ -1,40 +1,10 @@
-import { Dispatch, useEffect, useReducer, useState } from "react"
-import { buildliveGrid, cellGrid } from "./liveGrid"
-import { IShape, randomShape, rotateShape } from "./shapeFactory"
-
-enum TickType {
-    tick
-}
-interface ITickAction {
-    type: TickType
-}
-const tickReducer = (state: number, action: ITickAction): number => {
-    switch (action.type) {
-        case TickType.tick:
-            if (state > 17) {
-                return 2
-            }
-            else {
-                return state + 1
-            }
-    }
-}
-
-enum ShapeActionType {
-    rotate
-}
-
-interface IRotateAction {
-    type: ShapeActionType
-}
-
-const shapeReducer = (state: IShape, action: IRotateAction): IShape => {
-    switch (action.type) {
-        case ShapeActionType.rotate:
-            return rotateShape(state)
-    }
-}
-
+import { Dispatch, useEffect, useReducer } from "react"
+import { buildBaseGrid, buildliveGrid } from "./liveGrid"
+import {  randomShape, } from "./shapeFactory"
+import { cellGrid } from "./cellGrid"
+import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
+import { TickType, tickReducer } from "./reducerHooks/tick"
+import {shapeReducer,ShapeActionType} from "./reducerHooks/liveShape"
 
 
 export interface IUseGameLoopProps {
@@ -48,6 +18,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
     const initialXOffset = 4
 
     const initalShape = randomShape()
+    const initialFixedShapes = buildBaseGrid()
 
     //Game tick
     const [tick, tickDispatch] = useReducer(tickReducer, initialTick);
@@ -55,10 +26,14 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
         setInterval(() => {
             tickDispatch({ type: TickType.tick })
         }, tickRate)
+    
     }, [])
 
     //Active shape
-    const [shape, shapeDispatch] = useReducer(shapeReducer, initalShape)
+    const [liveShape, liveShapeDispatch] = useReducer(shapeReducer, initalShape)
+
+    //Fixed shapes
+    const [fixedShapes, fixedShapesDispatch] = useReducer(fixedShapeReducer, initialFixedShapes)
 
     //Player interaction
     const keyReducer = (state: number, action: React.KeyboardEvent): number => {
@@ -71,7 +46,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
                 return state - 1
             case 'ArrowUp':
                 action.preventDefault();
-                shapeDispatch({ type: ShapeActionType.rotate })
+                liveShapeDispatch({ type: ShapeActionType.rotate })
                 return state
             case 'ArrowDown':
                 action.preventDefault();
@@ -87,10 +62,10 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
     }
 
 
-    //The actual game loop
+    //Build the grid
     useEffect(() => {
-        gridSetter(buildliveGrid({ shapey: tick, shapex: xoffset, shape }).nextGrid)
-    }, [tick, xoffset, shape])
+        gridSetter(buildliveGrid({ shapey: tick, shapex: xoffset,  liveShape,liveShapeDispatch, fixedShapes, fixedShapesDispatch,tickDispatch }).nextGrid)
+    }, [tick, xoffset, liveShape,fixedShapes])
 
 
     return [onKeyDown]

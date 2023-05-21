@@ -4,8 +4,7 @@ export interface ICoordinate {
 }
 export interface IShape {
     coordinates: [ICoordinate, ICoordinate, ICoordinate, ICoordinate]
-    width: number;
-    height: number
+    baseOffset:number
 }
 
 
@@ -17,8 +16,7 @@ const Shapes: IShape[] = [
             { x: 0, y: 0 },
             { x: 1, y: 0 }
         ],
-        width: 1,
-        height: 3,
+        baseOffset:0
     },
     {
         coordinates: [
@@ -27,8 +25,7 @@ const Shapes: IShape[] = [
             { x: 0, y: 0 },
             { x: 0, y: 1 }
         ],
-        width: 1,
-        height: 4
+        baseOffset:1
     },
     {
         coordinates: [
@@ -37,8 +34,7 @@ const Shapes: IShape[] = [
             { x: 1, y: -1 },
             { x: 1, y: 0 }
         ],
-        width: 2,
-        height: 2
+        baseOffset:0
     }
 ];
 
@@ -47,9 +43,12 @@ export function randomShape(): IShape {
 }
 
 export function rotateShape(shape: IShape): IShape {
-    const newShape: IShape = { width: shape.width, height: shape.height, coordinates: shape.coordinates }
+    const newShape: IShape = {  coordinates: shape.coordinates, baseOffset:shape.baseOffset }
+    let biggestOffset = 0
     newShape.coordinates.forEach((cord, index) => {
         shape.coordinates[index] = { x: -cord.y, y: cord.x }
+        biggestOffset = cord.x>biggestOffset?cord.x:biggestOffset;
     })
+    newShape.baseOffset=biggestOffset
     return newShape
 }

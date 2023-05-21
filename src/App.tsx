@@ -1,14 +1,14 @@
-import React, { ReducerAction, useEffect, useReducer, useState } from 'react';
+import React, { useState } from 'react';
 import { CellGrid } from './components/CellGrid/CellGrid';
-import { buildliveGrid } from './gamelogic/liveGrid';
+import { buildBaseGrid } from './gamelogic/liveGrid';
 import { useGameLoop } from './gamelogic/gameLoop';
 
 
 
 
 const App: React.FC = () => {
-    const initalColourGrid = buildliveGrid({ shapey: 0, shapex: 0 });
-    const [colourGrid, setColourGrid] = useState(initalColourGrid.nextGrid)
+    const initalColourGrid = buildBaseGrid();
+    const [colourGrid, setColourGrid] = useState(initalColourGrid)
     const [onKeyDown] = useGameLoop({ gridSetter: setColourGrid, tickRate: 1000 })
     return (
         <div onKeyDown={onKeyDown} tabIndex={0}>
