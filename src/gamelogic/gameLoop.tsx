@@ -16,6 +16,22 @@ const tickReducer = (state: number, action: ITickAction): number => {
     }
 }
 
+
+
+
+const keyReducer = (state: number, action: React.KeyboardEvent): number => {
+    switch (action.key) {
+        case 'ArrowRight':
+            action.preventDefault();
+            return state + 1
+        case 'ArrowLeft':
+            action.preventDefault();
+            return state - 1
+        default:
+            break;
+    }
+}
+
 export interface IUseGameLoopProps {
     gridSetter: Dispatch<cellGrid>
     tickRate: number
@@ -24,17 +40,25 @@ const shape = randomShape()
 export const useGameLoop = (props: IUseGameLoopProps) => {
     const { gridSetter, tickRate } = props
     const initialTick = 0
+    const initialXOffset = 0
 
-    //Using a reducer to get around re-paint closure issues
-    const [tick, dispatch] = useReducer(tickReducer, initialTick);
+
+    //Using reducers to get around re-paint closure issues
+    const [tick, tickDispatch] = useReducer(tickReducer, initialTick);
     useEffect(() => {
         setInterval(() => {
-            dispatch({ type: TickType.tick })
+            tickDispatch({ type: TickType.tick })
         }, tickRate)
     }, [])
+    const [xoffset, xoffsetDispatch] = useReducer(keyReducer, initialXOffset)
 
+    function onKeyDown(event: React.KeyboardEvent) {
+        console.log("shabba")
+        xoffsetDispatch(event)
+    }
     //The actual game loop
     useEffect(() => {
-        gridSetter(buildliveGrid({ shapey: tick, shapex: 0, shape }).nextGrid)
-    }, [tick])
+        gridSetter(buildliveGrid({ shapey: tick, shapex: xoffset, shape }).nextGrid)
+    }, [tick, xoffset])
+    return [onKeyDown]
 }
