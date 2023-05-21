@@ -1,5 +1,6 @@
 import { Dispatch, useEffect, useReducer, useState } from "react"
 import { buildliveGrid, cellGrid } from "./liveGrid"
+import { randomShape } from "./shapeFactory"
 
 enum TickType {
     tick
@@ -19,7 +20,7 @@ export interface IUseGameLoopProps {
     gridSetter: Dispatch<cellGrid>
     tickRate: number
 }
-
+const shape = randomShape()
 export const useGameLoop = (props: IUseGameLoopProps) => {
     const { gridSetter, tickRate } = props
     const initialTick = 0
@@ -34,6 +35,6 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
 
     //The actual game loop
     useEffect(() => {
-        gridSetter(buildliveGrid({ shapey: tick }).nextGrid)
+        gridSetter(buildliveGrid({ shapey: tick, shapex: 0, shape }).nextGrid)
     }, [tick])
 }

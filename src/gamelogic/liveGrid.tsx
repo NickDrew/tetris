@@ -4,7 +4,7 @@ import { IShape } from "./shapeFactory"
 export type cellGrid = number[][]
 export interface IBuildLiveGridProps {
     shape?: IShape;
-    shapex?: number
+    shapex: number
     shapey: number
 }
 
@@ -15,10 +15,12 @@ export interface ILiveGrid {
 
 
 export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
-    const { shapey } = props;
+    const { shapey, shapex, shape } = props;
     const baseGrid = buildBaseGrid()
-    if (shapey < 18) {
-        baseGrid[shapey][0] = 7
+    if (shapey < 15 && shape) {
+        shape.coordinates.forEach((coordinate) => {
+            baseGrid[shapey + coordinate.y][coordinate.x] = 7
+        })
     }
 
     return { nextGrid: baseGrid }
