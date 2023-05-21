@@ -1,6 +1,6 @@
 import { Dispatch, useEffect, useReducer, useState } from "react"
 import { buildliveGrid, cellGrid } from "./liveGrid"
-import { randomShape } from "./shapeFactory"
+import { IShape, randomShape, rotateShape } from "./shapeFactory"
 
 enum TickType {
     tick
@@ -9,56 +9,84 @@ interface ITickAction {
     type: TickType
 }
 const tickReducer = (state: number, action: ITickAction): number => {
-    console.log(state)
     switch (action.type) {
         case TickType.tick:
-            return state + 1
+            if (state > 17) {
+                return 2
+            }
+            else {
+                return state + 1
+            }
+    }
+}
+
+enum ShapeActionType {
+    rotate
+}
+
+interface IRotateAction {
+    type: ShapeActionType
+}
+
+const shapeReducer = (state: IShape, action: IRotateAction): IShape => {
+    switch (action.type) {
+        case ShapeActionType.rotate:
+            return rotateShape(state)
     }
 }
 
 
-
-
-const keyReducer = (state: number, action: React.KeyboardEvent): number => {
-    switch (action.key) {
-        case 'ArrowRight':
-            action.preventDefault();
-            return state + 1
-        case 'ArrowLeft':
-            action.preventDefault();
-            return state - 1
-        default:
-            break;
-    }
-}
 
 export interface IUseGameLoopProps {
     gridSetter: Dispatch<cellGrid>
     tickRate: number
 }
-const shape = randomShape()
+
 export const useGameLoop = (props: IUseGameLoopProps) => {
     const { gridSetter, tickRate } = props
     const initialTick = 2
-    const initialXOffset = 0
+    const initialXOffset = 4
+    const initalShape = randomShape()
 
-
-    //Using reducers to get around re-paint closure issues
+    //Game tick
     const [tick, tickDispatch] = useReducer(tickReducer, initialTick);
     useEffect(() => {
         setInterval(() => {
             tickDispatch({ type: TickType.tick })
         }, tickRate)
     }, [])
-    const [xoffset, xoffsetDispatch] = useReducer(keyReducer, initialXOffset)
 
+    //Active shape
+    const [shape, shapeDispatch] = useReducer(shapeReducer, initalShape)
+
+    //Player interaction
+    const keyReducer = (state: number, action: React.KeyboardEvent): number => {
+        switch (action.key) {
+            case 'ArrowRight':
+                action.preventDefault();
+                return state + 1
+            case 'ArrowLeft':
+                action.preventDefault();
+                return state - 1
+            case 'ArrowUp':
+                console.log('Up')
+                shapeDispatch({ type: ShapeActionType.rotate })
+                return state
+            default:
+                return state
+        }
+    }
+    const [xoffset, xoffsetDispatch] = useReducer(keyReducer, initialXOffset)
     function onKeyDown(event: React.KeyboardEvent) {
-        console.log("shabba")
         xoffsetDispatch(event)
     }
+
+
     //The actual game loop
     useEffect(() => {
         gridSetter(buildliveGrid({ shapey: tick, shapex: xoffset, shape }).nextGrid)
-    }, [tick, xoffset])
+    }, [tick, xoffset, shape])
+
+
     return [onKeyDown]
 }

@@ -17,7 +17,7 @@ export interface ILiveGrid {
 export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
     const { shapey, shapex, shape } = props;
     const baseGrid = buildBaseGrid()
-    if (shapey < 15 && shape) {
+    if (shapey < baseGrid.length && shape) {
         shape.coordinates.forEach((coordinate) => {
             baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 7
         })

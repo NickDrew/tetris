@@ -43,6 +43,13 @@ const Shapes: IShape[] = [
 ];
 
 export function randomShape(): IShape {
-    return Shapes[2];
-    // return Shapes[Math.floor(Math.random() * Shapes.length)];
+    return Shapes[Math.floor(Math.random() * Shapes.length)];
+}
+
+export function rotateShape(shape: IShape): IShape {
+    const newShape: IShape = { width: shape.width, height: shape.height, coordinates: shape.coordinates }
+    newShape.coordinates.forEach((cord, index) => {
+        shape.coordinates[index] = { x: -cord.y, y: cord.x }
+    })
+    return newShape
 }
