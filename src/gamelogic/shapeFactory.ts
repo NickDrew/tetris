@@ -3,7 +3,7 @@ export interface ICoordinate {
     y: number;
 }
 export interface IShape {
-    coordinates: [ICoordinate, ICoordinate, ICoordinate, ICoordinate]
+    coordinates:ICoordinate[]
     baseOffset:number
 }
 
@@ -43,10 +43,10 @@ export function randomShape(): IShape {
 }
 
 export function rotateShape(shape: IShape): IShape {
-    const newShape: IShape = {  coordinates: shape.coordinates, baseOffset:shape.baseOffset }
+    const newShape: IShape = {  coordinates: [], baseOffset:0 }
     let biggestOffset = 0
-    newShape.coordinates.forEach((cord, index) => {
-        shape.coordinates[index] = { x: -cord.y, y: cord.x }
+    shape.coordinates.forEach((cord, index) => {
+        newShape.coordinates.push({ x: -cord.y, y: cord.x });
         biggestOffset = cord.x>biggestOffset?cord.x:biggestOffset;
     })
     newShape.baseOffset=biggestOffset
