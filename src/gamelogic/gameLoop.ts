@@ -29,10 +29,10 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
     
     }, [])
 
-    //Active shape
+    //The live shape controlled by the player
     const [liveShape, liveShapeDispatch] = useReducer(shapeReducer, initalShape)
 
-    //Fixed shapes
+    //The fixed shapes now locked in place after bottom contact
     const [fixedShapes, fixedShapesDispatch] = useReducer(fixedShapeReducer, initialFixedShapes)
 
     //Player interaction
