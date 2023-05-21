@@ -46,6 +46,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
     const { gridSetter, tickRate } = props
     const initialTick = 0
     const initialXOffset = 4
+
     const initalShape = randomShape()
 
     //Game tick
@@ -69,8 +70,13 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
                 action.preventDefault();
                 return state - 1
             case 'ArrowUp':
+                action.preventDefault();
                 shapeDispatch({ type: ShapeActionType.rotate })
                 return state
+            case 'ArrowDown':
+                action.preventDefault();
+                tickDispatch({ type: TickType.tick })
+                return state;
             default:
                 return state
         }
