@@ -44,7 +44,7 @@ export interface IUseGameLoopProps {
 
 export const useGameLoop = (props: IUseGameLoopProps) => {
     const { gridSetter, tickRate } = props
-    const initialTick = 2
+    const initialTick = 0
     const initialXOffset = 4
     const initalShape = randomShape()
 
@@ -69,7 +69,6 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
                 action.preventDefault();
                 return state - 1
             case 'ArrowUp':
-                console.log('Up')
                 shapeDispatch({ type: ShapeActionType.rotate })
                 return state
             default:

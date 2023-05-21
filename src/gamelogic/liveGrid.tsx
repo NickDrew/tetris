@@ -19,7 +19,8 @@ export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
     const baseGrid = buildBaseGrid()
     if (shapey < baseGrid.length && shape) {
         shape.coordinates.forEach((coordinate) => {
-            baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 7
+            if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
+                baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 7
         })
     }
 
