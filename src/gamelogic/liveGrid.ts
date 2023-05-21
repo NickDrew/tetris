@@ -32,8 +32,8 @@ export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
             baseGrid[y][x] = cell
         })
     })
-    console.log(shapey+liveShape!.baseOffset)
-    console.log(baseGrid.length)
+    let collisionDetected = false;
+    //Check for screen-bottom collision
     if((shapey+liveShape!.baseOffset)>=baseGrid.length-1)
     {
         fixedShapesDispatch({type:FixedShapesActionType.add,payload:{
@@ -43,8 +43,31 @@ export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
         }})
         tickDispatch({type:TickType.reset})
         liveShapeDispatch({type:ShapeActionType.randomise})
+        collisionDetected = true;
     }
-    if (shapey < baseGrid.length && liveShape) {
+    //Check for fixed shape collision
+    if (shapey < baseGrid.length && liveShape &&!collisionDetected) {
+        liveShape.coordinates.forEach((coordinate) => {
+            
+            if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
+            {
+                if(baseGrid[shapey + coordinate.y][shapex + coordinate.x] !=0)
+                {
+                    fixedShapesDispatch({type:FixedShapesActionType.add,payload:{
+                        shape: liveShape,
+                        x:shapex,
+                        y:shapey-1
+                    }})
+                    tickDispatch({type:TickType.reset})
+                    liveShapeDispatch({type:ShapeActionType.randomise})
+                    collisionDetected = true
+                }
+            }
+                
+        })
+    }
+    //Draw next update ready for paint
+    if (shapey < baseGrid.length && liveShape &&!collisionDetected) {
         liveShape.coordinates.forEach((coordinate) => {
             
             if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
