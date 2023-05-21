@@ -39,7 +39,7 @@ export interface IUseGameLoopProps {
 const shape = randomShape()
 export const useGameLoop = (props: IUseGameLoopProps) => {
     const { gridSetter, tickRate } = props
-    const initialTick = 0
+    const initialTick = 2
     const initialXOffset = 0
 
 
