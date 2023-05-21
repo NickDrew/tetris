@@ -16,7 +16,7 @@ export const CellGrid: React.FC<CellGridProps> = (props) => {
     for (let row = 0; row < rows; row++) {
         grid.push([])
         for (let col = 0; col < cols; col++) {
-            grid[row].push(<Cell key={`${col}${row}`} color={colorGrid[col][row] ? colorGrid[col][row] : defaultColor} />)
+            grid[row].push(<Cell key={`${col}${row}`} color={colorGrid[row][col] ? colorGrid[row][col] : defaultColor} />)
         }
     }
 
