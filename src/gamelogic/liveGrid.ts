@@ -66,6 +66,7 @@ export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
                 
         })
     }
+    
     //Draw next update ready for paint
     if (shapey < baseGrid.length && liveShape &&!collisionDetected) {
         liveShape.coordinates.forEach((coordinate) => {
