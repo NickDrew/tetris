@@ -1,20 +1,9 @@
-import React, { useState } from 'react';
-import { CellGrid } from './components/CellGrid/CellGrid';
-import { buildBaseGrid } from './gamelogic/liveGrid';
-import { useGameLoop } from './gamelogic/gameLoop';
-
-
+import React from 'react';
+import { Game } from './components/Game/Game';
 
 
 const App: React.FC = () => {
-    const initalColourGrid = buildBaseGrid();
-    const [colourGrid, setColourGrid] = useState(initalColourGrid)
-    const [onKeyDown] = useGameLoop({ gridSetter: setColourGrid, tickRate: 1000 })
-    return (
-        <div onKeyDown={onKeyDown} tabIndex={0}>
-            <CellGrid rows={18} cols={10} defaultColor={0} colorGrid={colourGrid} />
-        </div>
-    );
+    return <Game />
 };
 
 export default App;
