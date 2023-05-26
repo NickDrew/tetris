@@ -1,5 +1,5 @@
 import { Dispatch, useEffect, useReducer } from "react"
-import { buildBaseGrid, buildMergedGrid } from "./liveGrid"
+import { buildBaseGrid, buildMergedGrid } from "./mergedGrid"
 import {  randomShape, } from "./shapeFactory"
 import { cellGrid } from "./cellGrid"
 import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
@@ -32,7 +32,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
     //The live shape controlled by the player
     const [liveShape, liveShapeDispatch] = useReducer(shapeReducer, initalShape)
 
-    //The fixed shapes now locked in place after bottom contact
+    //The fixed shapes locked in place after bottom contact
     const [fixedShapes, fixedShapesDispatch] = useReducer(fixedShapeReducer, initialFixedShapes)
 
     //Player interaction

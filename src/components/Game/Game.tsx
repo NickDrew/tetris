@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CellGrid } from '../CellGrid/CellGrid';
-import { buildBaseGrid } from '../../gamelogic/liveGrid';
+import { buildBaseGrid } from '../../gamelogic/mergedGrid';
 import { useGameLoop } from '../../gamelogic/gameLoop';
 
 export const Game: React.FC = () => {
