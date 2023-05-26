@@ -22,7 +22,7 @@ export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): 
     switch (type) {
         case FixedShapesActionType.add:
             shape.coordinates.forEach((coord) => {
-                state[y + coord.y][x + coord.x] = 7
+                state[y + coord.y][x + coord.x] = 2
             })
             //Check for entire completed rows
             let fullRowCount = 0

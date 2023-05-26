@@ -1,5 +1,5 @@
 import { Dispatch, useEffect, useReducer } from "react"
-import { buildBaseGrid, buildliveGrid } from "./liveGrid"
+import { buildBaseGrid, buildMergedGrid } from "./liveGrid"
 import {  randomShape, } from "./shapeFactory"
 import { cellGrid } from "./cellGrid"
 import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
@@ -64,7 +64,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
 
     //Build the grid
     useEffect(() => {
-        gridSetter(buildliveGrid({ shapey: tick, shapex: xoffset,  liveShape,liveShapeDispatch, fixedShapes, fixedShapesDispatch,tickDispatch }).nextGrid)
+        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset,  liveShape,liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch,tickDispatch }))
     }, [tick, xoffset, liveShape,fixedShapes])
 
 

@@ -7,33 +7,19 @@ import { TickType } from "./reducerHooks/tick"
 import { ShapeActionType } from "./reducerHooks/liveShape"
 
 
-export interface IBuildLiveGridProps {
+export interface IBuildMergedGridProps {
     liveShape?: IShape
     shapex: number
     shapey: number
-    fixedShapes: cellGrid
+    staticGrid: cellGrid
     fixedShapesDispatch: Dispatch<any>
     tickDispatch: Dispatch<any>
     liveShapeDispatch:Dispatch<any>
 }
 
-export interface ILiveGrid {
-    //Next grid to paint
-    nextGrid: cellGrid
-}
-
-
-export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
-    const { shapey, shapex, liveShape, fixedShapes, fixedShapesDispatch,tickDispatch,liveShapeDispatch } = props;
-    const baseGrid = buildBaseGrid()
-
-    fixedShapes.forEach((row, y) => {
-        row.forEach((cell, x) => {
-            baseGrid[y][x] = cell
-        })
-    })
+const isGridBottomCollisions= (props:{mergeProps:IBuildMergedGridProps, baseGrid:cellGrid}):boolean =>{
+    const { mergeProps:{shapey, shapex, liveShape, fixedShapesDispatch,tickDispatch,liveShapeDispatch}, baseGrid } = props;
     let collisionDetected = false;
-    //Check for screen-bottom collision
     if((shapey+liveShape!.baseOffset)>=baseGrid.length-1)
     {
         fixedShapesDispatch({type:FixedShapesActionType.add,payload:{
@@ -45,10 +31,16 @@ export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
         liveShapeDispatch({type:ShapeActionType.randomise})
         collisionDetected = true;
     }
-    //Check for fixed shape collision
-    if (shapey < baseGrid.length && liveShape &&!collisionDetected) {
+    return collisionDetected
+}
+
+const isStaticGridCollisios = (props:{mergeProps:IBuildMergedGridProps, baseGrid:cellGrid}) =>{
+    const { mergeProps:{shapey, shapex, liveShape, fixedShapesDispatch,tickDispatch,liveShapeDispatch}, baseGrid } = props;
+    let collisionDetected=false
+    if(liveShape)
+    {
         liveShape.coordinates.forEach((coordinate) => {
-            
+                
             if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
             {
                 if(baseGrid[shapey + coordinate.y][shapex + coordinate.x] !=0)
@@ -66,17 +58,38 @@ export const buildliveGrid = (props: IBuildLiveGridProps): ILiveGrid => {
                 
         })
     }
+    return collisionDetected;
+}
+
+
+export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
+    const { shapey, shapex, liveShape, staticGrid } = props;
+    const baseGrid = buildBaseGrid()
+
+    //Merge static shapes into the base grid
+    staticGrid.forEach((row, y) => {
+        row.forEach((cell, x) => {
+            baseGrid[y][x] = cell
+        })
+    })
     
-    //Draw next update ready for paint
+    //Collision checking
+    let collisionDetected = isGridBottomCollisions({mergeProps:props,baseGrid})
+    if (shapey < baseGrid.length && !collisionDetected) {
+       collisionDetected = isStaticGridCollisios({mergeProps:props, baseGrid})
+    }
+    
+    
     if (shapey < baseGrid.length && liveShape &&!collisionDetected) {
+        //If no collision, merge live shape onto the base grid
         liveShape.coordinates.forEach((coordinate) => {
             
             if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
-                baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 3
+                baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 1
         })
     }
 
-    return { nextGrid: baseGrid }
+    return baseGrid 
 }
 
 export const buildBaseGrid = (): cellGrid => {

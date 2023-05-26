@@ -7,13 +7,8 @@
     --cell-border-bottom-color: rgba(0, 0, 0, 0.5);
 
     --cell-color-0: #eaeaea;
-    --cell-color-1: #ff6600;
-    --cell-color-2: #eec900;
-    --cell-color-3: #0000ff;
-    --cell-color-4: #cc00ff;
-    --cell-color-5: #00ff00;
-    --cell-color-6: #66ccff;
-    --cell-color-7: #ff0000;
+    --cell-color-1: #0000ff;
+    --cell-color-2: #ff0000;
 
     --cell-size: 20px;
     --cell-border-width: 5px;
