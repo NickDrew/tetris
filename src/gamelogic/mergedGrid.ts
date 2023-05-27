@@ -21,12 +21,11 @@ const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProps, base
     const { mergeProps: { shapey, shapex, liveShape, }, baseGrid } = props;
     let collisionDetected = false;
     if (liveShape) {
-        liveShape.coordinates.forEach((coordinate) => {
-            if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
-                if (shapey + coordinate.y >= baseGrid.length - 1) {
-                    collisionDetected = true
-                }
+        liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+            if (shapey + coordinate.y >= baseGrid.length - 1) {
+                collisionDetected = true
             }
+
         })
     }
     return collisionDetected;
@@ -38,7 +37,8 @@ const handleGridBottomCollision = (props: IBuildMergedGridProps) => {
         type: FixedShapesActionType.add, payload: {
             shape: liveShape,
             x: shapex,
-            y: shapey
+            y: shapey,
+            rotationIndex: liveShape!.roatationIndex
         }
     })
     tickDispatch({ type: TickType.reset })
@@ -49,7 +49,7 @@ const isStaticGridCollision = (props: { mergeProps: IBuildMergedGridProps, baseG
     const { mergeProps: { shapey, shapex, liveShape }, baseGrid } = props;
     let collisionDetected = false
     if (liveShape) {
-        liveShape.coordinates.forEach((coordinate) => {
+        liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
             if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
                 if (baseGrid[shapey + coordinate.y][shapex + coordinate.x] != 0) {
                     collisionDetected = true
@@ -66,7 +66,8 @@ const handleStaticGridCollision = (props: IBuildMergedGridProps) => {
         type: FixedShapesActionType.add, payload: {
             shape: liveShape,
             x: shapex,
-            y: shapey - 1
+            y: shapey - 1,
+            rotationIndex: liveShape!.roatationIndex
         }
     })
     tickDispatch({ type: TickType.reset })
@@ -108,18 +109,19 @@ export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
     })
 
     //Collision checking
-    if (isGridBottomCollisions({ mergeProps: props, baseGrid })) {
-        handleGridBottomCollision(props);
+
+    if (isStaticGridCollision({ mergeProps: props, baseGrid })) {
+        handleStaticGridCollision(props,)
     }
     else {
-        if (isStaticGridCollision({ mergeProps: props, baseGrid })) {
-            handleStaticGridCollision(props,)
+        if (isGridBottomCollisions({ mergeProps: props, baseGrid })) {
+            handleGridBottomCollision(props);
         }
         else {
             if (liveShape) {
                 //If no collision, merge live shape in new position with the base grid
-                liveShape.coordinates.forEach((coordinate) => {
-
+                liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+                    console.log(liveShape.roatationIndex);
                     if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
                         baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 1
                 })

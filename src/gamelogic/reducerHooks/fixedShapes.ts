@@ -9,6 +9,7 @@ export interface IFixedShapesAction {
     type: FixedShapesActionType,
     payload: {
         shape: IShape,
+        rotationIndex: number
         x: number,
         y: number,
     }
@@ -18,11 +19,11 @@ const buildBaseRow = () => {
 }
 
 export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): cellGrid => {
-    const { type, payload: { shape, x, y } } = action
+    const { type, payload: { shape, x, y, rotationIndex } } = action
     switch (type) {
         case FixedShapesActionType.add:
             console.log("add")
-            shape.coordinates.forEach((coord) => {
+            shape.roatatingCoordinates[rotationIndex].forEach((coord) => {
                 console.log(coord)
                 console.log(y)
                 state[y + coord.y][x + coord.x] = 2
