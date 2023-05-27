@@ -18,11 +18,18 @@ export interface IBuildMergedGridProps {
 }
 
 const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProps, baseGrid: cellGrid }): boolean => {
-    const { mergeProps: { shapey, liveShape, }, baseGrid } = props;
-    if ((shapey + liveShape!.baseOffset) >= baseGrid.length - 1) {
-        return true;
+    const { mergeProps: { shapey, shapex, liveShape, }, baseGrid } = props;
+    let collisionDetected = false;
+    if (liveShape) {
+        liveShape.coordinates.forEach((coordinate) => {
+            if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
+                if (shapey + coordinate.y >= baseGrid.length - 1) {
+                    collisionDetected = true
+                }
+            }
+        })
     }
-    return false;
+    return collisionDetected;
 }
 
 const handleGridBottomCollision = (props: IBuildMergedGridProps) => {
