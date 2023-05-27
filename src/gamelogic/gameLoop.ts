@@ -1,10 +1,10 @@
 import { Dispatch, useEffect, useReducer } from "react"
 import { buildBaseGrid, buildMergedGrid } from "./mergedGrid"
-import {  randomShape, } from "./shapeFactory"
+import { randomShape, } from "./shapeFactory"
 import { cellGrid } from "./cellGrid"
 import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
 import { TickType, tickReducer } from "./reducerHooks/tick"
-import {shapeReducer,ShapeActionType} from "./reducerHooks/liveShape"
+import { shapeReducer, ShapeActionType } from "./reducerHooks/liveShape"
 
 
 export interface IUseGameLoopProps {
@@ -26,7 +26,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
         setInterval(() => {
             tickDispatch({ type: TickType.tick })
         }, tickRate)
-    
+
     }, [])
 
     //The live shape controlled by the player
@@ -64,8 +64,8 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
 
     //Build the grid
     useEffect(() => {
-        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset,  liveShape,liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch,tickDispatch }))
-    }, [tick, xoffset, liveShape,fixedShapes])
+        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch }))
+    }, [tick, xoffset, liveShape, fixedShapes])
 
 
     return [onKeyDown]

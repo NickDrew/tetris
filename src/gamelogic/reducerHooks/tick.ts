@@ -8,12 +8,7 @@ export interface ITickAction {
 export const tickReducer = (tick: number, action: ITickAction): number => {
     switch (action.type) {
         case TickType.tick:
-            if (tick > 17) {
-                return 2
-            }
-            else {
-                return tick + 1
-            }
+            return tick + 1
         case TickType.reset:
             return 0
     }
