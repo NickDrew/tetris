@@ -1,7 +1,7 @@
 
 import { Dispatch } from "react"
 import { IShape } from "./shapeFactory"
-import { cellGrid } from "./cellGrid"
+import { buildBaseGrid, cellGrid } from "./cellGrid"
 import { FixedShapesActionType } from "./reducerHooks/fixedShapes"
 import { TickType } from "./reducerHooks/tick"
 import { ShapeActionType } from "./reducerHooks/liveShape"
@@ -78,28 +78,7 @@ const handleStaticGridCollision = (props: IBuildMergedGridProps) => {
     liveShapeDispatch({ type: ShapeActionType.randomise })
 }
 
-export const buildBaseGrid = (): cellGrid => {
-    return [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-    ]
-}
+
 
 export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
     const { shapey, shapex, liveShape, staticGrid } = props;

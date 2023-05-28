@@ -1,10 +1,10 @@
 import React, { useReducer, useState } from 'react';
 import { CellGrid } from '../CellGrid/CellGrid';
-import { buildBaseGrid } from '../../gamelogic/mergedGrid';
 import { useGameLoop } from '../../gamelogic/gameLoop';
 import styles from './gameStyle.module.css'
 import { Scoreboard } from '../Scoreboard/Scoreboard';
 import { scoreReducer } from '../../gamelogic/reducerHooks/score';
+import { buildBaseGrid } from '../../gamelogic/cellGrid';
 
 export const Game: React.FC = () => {
     const initalColourGrid = buildBaseGrid();
