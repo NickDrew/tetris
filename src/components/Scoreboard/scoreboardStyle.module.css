@@ -1,0 +1,17 @@
+.scoreboardOuter {
+    height: 200px;
+    width: 200px;
+    padding-left: 20px;
+}
+
+.scoreboardInner {
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-width: var(--cell-border-width);
+    border-left-color: var(--cell-border-left-color);
+    border-top-color: var(--cell-border-top-color);
+    border-right-color: var(--cell-border-right-color);
+    border-bottom-color: var(--cell-border-bottom-color);
+    background-color: var(--cell-color-0);
+}

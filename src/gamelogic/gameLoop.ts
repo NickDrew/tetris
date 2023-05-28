@@ -5,10 +5,13 @@ import { cellGrid } from "./cellGrid"
 import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
 import { TickType, tickReducer } from "./reducerHooks/tick"
 import { shapeReducer, ShapeActionType } from "./reducerHooks/liveShape"
+import { IScoreAction } from "./reducerHooks/score"
 
 
 export interface IUseGameLoopProps {
     gridSetter: Dispatch<cellGrid>
+    levelSetter: Dispatch<number>
+    scoreDespatch: Dispatch<IScoreAction>
     tickRate: number
 }
 
@@ -66,7 +69,7 @@ const isCollisionLeft = (props: IIsCollisionProps): boolean => {
 }
 
 export const useGameLoop = (props: IUseGameLoopProps) => {
-    const { gridSetter, tickRate } = props
+    const { gridSetter, tickRate, scoreDespatch } = props
     const initialTick = 0
     const initialXOffset = 4
 
@@ -117,7 +120,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
 
     //Build the grid
     useEffect(() => {
-        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch }))
+        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch, scoreDespatch }))
     }, [tick, xoffset, liveShape, fixedShapes])
 
 

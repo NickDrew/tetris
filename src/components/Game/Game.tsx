@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { CellGrid } from '../CellGrid/CellGrid';
 import { buildBaseGrid } from '../../gamelogic/mergedGrid';
 import { useGameLoop } from '../../gamelogic/gameLoop';
+import styles from './gameStyle.module.css'
+import { Scoreboard } from '../Scoreboard/Scoreboard';
+import { scoreReducer } from '../../gamelogic/reducerHooks/score';
 
 export const Game: React.FC = () => {
     const initalColourGrid = buildBaseGrid();
     const [colourGrid, setColourGrid] = useState(initalColourGrid)
-    const [onKeyDown] = useGameLoop({ gridSetter: setColourGrid, tickRate: 1000 })
+    const [score, scoreDespatch] = useReducer(scoreReducer, 0);
+    const [level, setLevel] = useState(0);
+
+    const [onKeyDown] = useGameLoop({ gridSetter: setColourGrid, scoreDespatch: scoreDespatch, levelSetter: setLevel, tickRate: 1000 })
     return (
-        <div onKeyDown={onKeyDown} tabIndex={0}>
+        <div className={styles.game} onKeyDown={onKeyDown} tabIndex={0}>
             <CellGrid rows={18} cols={10} defaultColor={0} colorGrid={colourGrid} />
+            <Scoreboard score={score} level={level} />
         </div>
     );
 }

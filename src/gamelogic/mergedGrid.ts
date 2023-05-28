@@ -5,6 +5,7 @@ import { cellGrid } from "./cellGrid"
 import { FixedShapesActionType } from "./reducerHooks/fixedShapes"
 import { TickType } from "./reducerHooks/tick"
 import { ShapeActionType } from "./reducerHooks/liveShape"
+import { IScoreAction } from "./reducerHooks/score"
 
 
 export interface IBuildMergedGridProps {
@@ -15,6 +16,7 @@ export interface IBuildMergedGridProps {
     fixedShapesDispatch: Dispatch<any>
     tickDispatch: Dispatch<any>
     liveShapeDispatch: Dispatch<any>
+    scoreDespatch: Dispatch<IScoreAction>
 }
 
 const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProps, baseGrid: cellGrid }): boolean => {
@@ -32,13 +34,14 @@ const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProps, base
 }
 
 const handleGridBottomCollision = (props: IBuildMergedGridProps) => {
-    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch } = props;
+    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDespatch } = props;
     fixedShapesDispatch({
         type: FixedShapesActionType.add, payload: {
             shape: liveShape,
             x: shapex,
             y: shapey,
-            rotationIndex: liveShape!.roatationIndex
+            rotationIndex: liveShape!.roatationIndex,
+            scoreDespatch
         }
     })
     tickDispatch({ type: TickType.reset })
@@ -61,13 +64,14 @@ const isStaticGridCollision = (props: { mergeProps: IBuildMergedGridProps, baseG
 }
 
 const handleStaticGridCollision = (props: IBuildMergedGridProps) => {
-    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch } = props;
+    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDespatch } = props;
     fixedShapesDispatch({
         type: FixedShapesActionType.add, payload: {
             shape: liveShape,
             x: shapex,
             y: shapey - 1,
-            rotationIndex: liveShape!.roatationIndex
+            rotationIndex: liveShape!.roatationIndex,
+            scoreDespatch
         }
     })
     tickDispatch({ type: TickType.reset })
