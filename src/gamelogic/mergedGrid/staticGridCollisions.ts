@@ -20,10 +20,10 @@ export const isStaticGridCollision = (props: { mergeProps: IBuildMergedGridProps
 }
 
 export const handleStaticGridCollision = (props: IBuildMergedGridProps) => {
-    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDespatch } = props;
+    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch: scoreDespatch } = props;
     fixedShapesDispatch({
         type: FixedShapesActionType.add, payload: {
-            shape: liveShape,
+            shape: liveShape!,
             x: shapex,
             y: shapey - 1,
             scoreDespatch

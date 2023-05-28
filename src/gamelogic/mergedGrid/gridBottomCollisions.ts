@@ -5,7 +5,7 @@ import { TickType } from "../reducerHooks/tick";
 import { IBuildMergedGridProps } from "./IMergedGrid";
 
 export const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProps, baseGrid: cellGrid }): boolean => {
-    const { mergeProps: { shapey, shapex, liveShape, }, baseGrid } = props;
+    const { mergeProps: { shapey, liveShape, }, baseGrid } = props;
     let collisionDetected = false;
     if (liveShape) {
         liveShape.rotatingCoordinates[liveShape.rotationIndex].forEach((coordinate) => {
@@ -19,10 +19,10 @@ export const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProp
 }
 
 export const handleGridBottomCollision = (props: IBuildMergedGridProps) => {
-    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDespatch } = props;
+    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch: scoreDespatch } = props;
     fixedShapesDispatch({
         type: FixedShapesActionType.add, payload: {
-            shape: liveShape,
+            shape: liveShape!,
             x: shapex,
             y: shapey,
             scoreDespatch

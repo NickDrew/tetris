@@ -119,7 +119,7 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
 
     //Build the grid
     useEffect(() => {
-        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch, scoreDespatch }))
+        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch, scoreDispatch: scoreDespatch }))
     }, [tick, xoffset, liveShape, fixedShapes])
 
 
