@@ -26,7 +26,7 @@ export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): 
         case FixedShapesActionType.add:
             let topGridHit = false;
             shape.rotatingCoordinates[shape.rotationIndex].forEach((coord) => {
-                if ((y + coord.y) == -1) {
+                if ((y + coord.y) <= -1) {
                     topGridHit = true
                 }
                 else {

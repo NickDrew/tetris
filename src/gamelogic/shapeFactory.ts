@@ -4,12 +4,12 @@ export interface ICoordinate {
 }
 export interface IShape {
     rotatingCoordinates: ICoordinate[][]
-    rotationIndex: 0
+    rotationIndex: number;
     baseOffset: number
 }
 
 
-const Shapes: IShape[] = [
+export const Shapes: IShape[] = [
 
     {
         //Line piece
