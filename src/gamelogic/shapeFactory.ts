@@ -217,15 +217,10 @@ export function randomShape(): IShape {
 }
 
 export function rotateShape(shape: IShape): IShape {
-    shape.roatationIndex++;
-    if (shape.roatationIndex >= shape.roatatingCoordinates.length) shape.roatationIndex = 0;
-    return shape;
-    // const newShape: IShape = { coordinates: [], roatatingCoordinates: [], roatationIndex: 0, baseOffset: 0 }
-    // let biggestOffset = 0
-    // shape.coordinates.forEach((cord, index) => {
-    //     newShape.coordinates.push({ x: -cord.y, y: cord.x });
-    //     biggestOffset = cord.x > biggestOffset ? cord.x : biggestOffset;
-    // })
-    // newShape.baseOffset = biggestOffset
-    // return newShape
+    const newShape = {
+        ...shape
+    }
+    newShape.roatationIndex++;
+    if (newShape.roatationIndex >= newShape.roatatingCoordinates.length) newShape.roatationIndex = 0;
+    return newShape;
 }
