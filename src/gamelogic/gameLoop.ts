@@ -1,6 +1,6 @@
 import { Dispatch, useEffect, useReducer } from "react"
 import { buildBaseGrid, buildMergedGrid } from "./mergedGrid"
-import { randomShape, } from "./shapeFactory"
+import { IShape, randomShape, } from "./shapeFactory"
 import { cellGrid } from "./cellGrid"
 import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
 import { TickType, tickReducer } from "./reducerHooks/tick"
@@ -10,6 +10,59 @@ import { shapeReducer, ShapeActionType } from "./reducerHooks/liveShape"
 export interface IUseGameLoopProps {
     gridSetter: Dispatch<cellGrid>
     tickRate: number
+}
+
+interface IIsCollisionProps {
+    liveShape: IShape,
+    fixedShapes: cellGrid,
+    shapey: number,
+    shapex: number
+}
+
+const isCollisionRight = (props: IIsCollisionProps): boolean => {
+    const { liveShape, fixedShapes, shapex, shapey } = props;
+    let collisionDetected = false
+    if (liveShape) {
+        liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+            if (shapex + coordinate.x >= fixedShapes[0].length) {
+                collisionDetected = true
+            }
+
+        })
+        if (!collisionDetected) {
+            liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+                if (fixedShapes[shapey + coordinate.y] != undefined && fixedShapes[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
+                    if (fixedShapes[shapey + coordinate.y][shapex + coordinate.x + 1] != 0) {
+                        collisionDetected = true
+                    }
+                }
+            })
+        }
+    }
+    return collisionDetected;
+}
+
+const isCollisionLeft = (props: IIsCollisionProps): boolean => {
+    const { liveShape, fixedShapes, shapex, shapey } = props;
+    let collisionDetected = false
+    if (liveShape) {
+        liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+            if (shapex + coordinate.x == 0) {
+                collisionDetected = true
+            }
+
+        })
+        if (!collisionDetected) {
+            liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+                if (fixedShapes[shapey + coordinate.y] != undefined && fixedShapes[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
+                    if (fixedShapes[shapey + coordinate.y][shapex + coordinate.x - 1] != 0) {
+                        collisionDetected = true
+                    }
+                }
+            })
+        }
+    }
+    return collisionDetected;
 }
 
 export const useGameLoop = (props: IUseGameLoopProps) => {
@@ -40,10 +93,10 @@ export const useGameLoop = (props: IUseGameLoopProps) => {
         switch (action.key) {
             case 'ArrowRight':
                 action.preventDefault();
-                return state + 1
+                return isCollisionRight({ liveShape, fixedShapes, shapex: state, shapey: tick }) ? state : state + 1
             case 'ArrowLeft':
                 action.preventDefault();
-                return state - 1
+                return isCollisionLeft({ liveShape, fixedShapes, shapex: state, shapey: tick }) ? state : state - 1
             case 'ArrowUp':
                 action.preventDefault();
                 liveShapeDispatch({ type: ShapeActionType.rotate })
