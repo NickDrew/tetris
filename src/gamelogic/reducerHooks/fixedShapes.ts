@@ -11,22 +11,21 @@ export interface IFixedShapesAction {
     type: FixedShapesActionType,
     payload: {
         shape: IShape,
-        rotationIndex: number
         x: number,
         y: number,
         scoreDespatch: Dispatch<IScoreAction>
     }
 }
-const buildBaseRow = () => {
+export const buildBaseRow = () => {
     return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 }
 
 export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): cellGrid => {
-    const { type, payload: { shape, x, y, rotationIndex, scoreDespatch } } = action
+    const { type, payload: { shape, x, y, scoreDespatch } } = action
     switch (type) {
         case FixedShapesActionType.add:
             let topGridHit = false;
-            shape.roatatingCoordinates[rotationIndex].forEach((coord) => {
+            shape.rotatingCoordinates[shape.rotationIndex].forEach((coord) => {
                 if ((y + coord.y) == -1) {
                     topGridHit = true
                 }

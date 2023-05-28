@@ -23,7 +23,7 @@ const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProps, base
     const { mergeProps: { shapey, shapex, liveShape, }, baseGrid } = props;
     let collisionDetected = false;
     if (liveShape) {
-        liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+        liveShape.rotatingCoordinates[liveShape.rotationIndex].forEach((coordinate) => {
             if (shapey + coordinate.y >= baseGrid.length - 1) {
                 collisionDetected = true
             }
@@ -40,7 +40,6 @@ const handleGridBottomCollision = (props: IBuildMergedGridProps) => {
             shape: liveShape,
             x: shapex,
             y: shapey,
-            rotationIndex: liveShape!.roatationIndex,
             scoreDespatch
         }
     })
@@ -52,7 +51,7 @@ const isStaticGridCollision = (props: { mergeProps: IBuildMergedGridProps, baseG
     const { mergeProps: { shapey, shapex, liveShape }, baseGrid } = props;
     let collisionDetected = false
     if (liveShape) {
-        liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+        liveShape.rotatingCoordinates[liveShape.rotationIndex].forEach((coordinate) => {
             if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
                 if (baseGrid[shapey + coordinate.y][shapex + coordinate.x] != 0) {
                     collisionDetected = true
@@ -70,7 +69,6 @@ const handleStaticGridCollision = (props: IBuildMergedGridProps) => {
             shape: liveShape,
             x: shapex,
             y: shapey - 1,
-            rotationIndex: liveShape!.roatationIndex,
             scoreDespatch
         }
     })
@@ -103,7 +101,7 @@ export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
         else {
             if (liveShape) {
                 //If no collision, merge live shape in new position with the base grid
-                liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
+                liveShape.rotatingCoordinates[liveShape.rotationIndex].forEach((coordinate) => {
                     if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
                         baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 1
                 })

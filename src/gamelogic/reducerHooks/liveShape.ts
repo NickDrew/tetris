@@ -15,7 +15,7 @@ export const shapeReducer = (state: IShape, action: IShapeAction): IShape => {
             return rotateShape(state)
         case ShapeActionType.randomise:
             const shape = randomShape();
-            shape.roatationIndex = 0;
+            shape.rotationIndex = 0;
             return shape;
     }
 }
