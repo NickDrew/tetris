@@ -10,7 +10,6 @@ import { IScoreAction } from "./reducerHooks/score"
 
 export interface IUseGameLoopProps {
     gridSetter: Dispatch<cellGrid>
-    levelSetter: Dispatch<number>
     scoreDespatch: Dispatch<IScoreAction>
     tickRate: number
 }
