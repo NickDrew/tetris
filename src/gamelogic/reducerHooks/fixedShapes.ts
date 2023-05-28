@@ -24,8 +24,6 @@ export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): 
         case FixedShapesActionType.add:
             console.log("add")
             shape.roatatingCoordinates[rotationIndex].forEach((coord) => {
-                console.log(coord)
-                console.log(y)
                 state[y + coord.y][x + coord.x] = 2
             })
             //Check for entire completed rows

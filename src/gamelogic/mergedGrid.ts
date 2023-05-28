@@ -121,7 +121,6 @@ export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
             if (liveShape) {
                 //If no collision, merge live shape in new position with the base grid
                 liveShape.roatatingCoordinates[liveShape.roatationIndex].forEach((coordinate) => {
-                    console.log(liveShape.roatationIndex);
                     if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined)
                         baseGrid[shapey + coordinate.y][shapex + coordinate.x] = 1
                 })
