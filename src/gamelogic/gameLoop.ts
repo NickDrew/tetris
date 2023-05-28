@@ -1,5 +1,5 @@
 import { Dispatch, useEffect, useReducer } from "react"
-import { buildMergedGrid } from "./mergedGrid"
+import { buildMergedGrid } from "./mergedGrid/mergedGrid"
 import { IShape, randomShape, } from "./shapeFactory"
 import { buildBaseGrid, cellGrid } from "./cellGrid"
 import { fixedShapeReducer } from "./reducerHooks/fixedShapes"
