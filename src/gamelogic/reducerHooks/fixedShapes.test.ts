@@ -24,7 +24,7 @@ describe('fixedShapeReducer', () => {
             type: FixedShapesActionType.add,
             payload: {
                 shape: {
-                    rotatingCoordinates: [[{ x: 0, y: 0 }, { x: 0, y: 1 }]], // Sample shape coordinates
+                    rotatingCoordinates: [[{ x: 0, y: 0 }, { x: 0, y: 1 }]],
                     rotationIndex: 0,
                     baseOffset: 0,
                 },
@@ -52,7 +52,7 @@ describe('fixedShapeReducer', () => {
             type: FixedShapesActionType.add,
             payload: {
                 shape: {
-                    rotatingCoordinates: [[{ x: 0, y: -1 }, { x: 0, y: 0 }]], // Sample shape coordinates hitting top grid
+                    rotatingCoordinates: [[{ x: 0, y: -1 }, { x: 0, y: 0 }]],
                     rotationIndex: 0,
                     baseOffset: 0,
                 },
@@ -81,7 +81,7 @@ describe('fixedShapeReducer', () => {
             type: FixedShapesActionType.add,
             payload: {
                 shape: {
-                    rotatingCoordinates: [[{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }]], // Sample shape coordinates completing two rows
+                    rotatingCoordinates: [[{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }]],
                     rotationIndex: 0,
                     baseOffset: 0,
                 },

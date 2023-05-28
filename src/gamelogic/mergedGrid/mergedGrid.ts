@@ -15,7 +15,7 @@ export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
         })
     })
 
-    //Collision checking
+    //Collision logic
     if (isStaticGridCollision({ mergeProps: props, baseGrid })) {
         handleStaticGridCollision(props,)
     }
