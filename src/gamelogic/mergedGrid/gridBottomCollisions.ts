@@ -19,13 +19,13 @@ export const isGridBottomCollisions = (props: { mergeProps: IBuildMergedGridProp
 }
 
 export const handleGridBottomCollision = (props: IBuildMergedGridProps) => {
-    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch: scoreDespatch } = props;
+    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch } = props;
     fixedShapesDispatch({
         type: FixedShapesActionType.add, payload: {
             shape: liveShape!,
             x: shapex,
             y: shapey,
-            scoreDespatch
+            scoreDispatch: scoreDispatch
         }
     })
     tickDispatch({ type: TickType.reset })

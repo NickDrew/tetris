@@ -5,7 +5,7 @@ import { handleGridBottomCollision, isGridBottomCollisions } from "./gridBottomC
 import { handleStaticGridCollision, isStaticGridCollision } from "./staticGridCollisions"
 
 export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
-    const { shapey, shapex, liveShape, staticGrid } = props;
+    const { shapey, shapex, liveShape, staticGrid, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch } = props;
     const baseGrid = buildBaseGrid()
 
     //Merge static shapes into the base grid
@@ -16,8 +16,8 @@ export const buildMergedGrid = (props: IBuildMergedGridProps): cellGrid => {
     })
 
     //Collision logic
-    if (isStaticGridCollision({ mergeProps: props, baseGrid })) {
-        handleStaticGridCollision(props,)
+    if (isStaticGridCollision({ shapex, shapey, liveShape, staticGrid })) {
+        handleStaticGridCollision({ shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch })
     }
     else {
         if (isGridBottomCollisions({ mergeProps: props, baseGrid })) {

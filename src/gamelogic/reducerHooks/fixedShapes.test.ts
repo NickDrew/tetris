@@ -31,7 +31,7 @@ describe('fixedShapeReducer', () => {
                 x: 0,
                 y: 0,
 
-                scoreDespatch: scoreDispatchMock
+                scoreDispatch: scoreDispatchMock
             }
         };
 
@@ -58,7 +58,7 @@ describe('fixedShapeReducer', () => {
                 },
                 x: 0,
                 y: 0,
-                scoreDespatch: scoreDispatchMock
+                scoreDispatch: scoreDispatchMock
             }
         };
 
@@ -87,7 +87,7 @@ describe('fixedShapeReducer', () => {
                 },
                 x: 0,
                 y: 0,
-                scoreDespatch: scoreDispatchMock
+                scoreDispatch: scoreDispatchMock
             }
         };
 

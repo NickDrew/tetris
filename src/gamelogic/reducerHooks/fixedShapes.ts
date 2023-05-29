@@ -13,7 +13,7 @@ export interface IFixedShapesAction {
         shape: IShape,
         x: number,
         y: number,
-        scoreDespatch: Dispatch<IScoreAction>
+        scoreDispatch: Dispatch<IScoreAction>
     }
 }
 export const buildBaseRow = () => {
@@ -21,7 +21,7 @@ export const buildBaseRow = () => {
 }
 
 export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): cellGrid => {
-    const { type, payload: { shape, x, y, scoreDespatch } } = action
+    const { type, payload: { shape, x, y, scoreDispatch } } = action
     switch (type) {
         case FixedShapesActionType.add:
             let topGridHit = false;
@@ -36,7 +36,7 @@ export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): 
             })
             if (topGridHit) {
                 state = buildBaseGrid();
-                scoreDespatch({ type: ScoreActionType.set, payload: { amount: 0 } })
+                scoreDispatch({ type: ScoreActionType.set, payload: { amount: 0 } })
             }
             else {
                 //Check for entire completed rows
@@ -62,16 +62,16 @@ export const fixedShapeReducer = (state: cellGrid, action: IFixedShapesAction): 
                         //no points
                         break;
                     case 1:
-                        scoreDespatch({ type: ScoreActionType.add, payload: { amount: 100 } })
+                        scoreDispatch({ type: ScoreActionType.add, payload: { amount: 100 } })
                         break;
                     case 2:
-                        scoreDespatch({ type: ScoreActionType.add, payload: { amount: 300 } })
+                        scoreDispatch({ type: ScoreActionType.add, payload: { amount: 300 } })
                         break;
                     case 3:
-                        scoreDespatch({ type: ScoreActionType.add, payload: { amount: 500 } })
+                        scoreDispatch({ type: ScoreActionType.add, payload: { amount: 500 } })
                         break;
                     case 4:
-                        scoreDespatch({ type: ScoreActionType.add, payload: { amount: 800 } })
+                        scoreDispatch({ type: ScoreActionType.add, payload: { amount: 800 } })
                         break;
                 }
             }

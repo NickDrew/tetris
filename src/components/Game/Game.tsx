@@ -9,9 +9,9 @@ import { buildBaseGrid } from '../../gamelogic/cellGrid';
 export const Game: React.FC = () => {
     const initalColourGrid = buildBaseGrid();
     const [colourGrid, setColourGrid] = useState(initalColourGrid)
-    const [score, scoreDespatch] = useReducer(scoreReducer, 0);
+    const [score, scoreDispatch] = useReducer(scoreReducer, 0);
 
-    const [onKeyDown] = useGameLoop({ gridSetter: setColourGrid, scoreDespatch: scoreDespatch, tickRate: 1000 })
+    const [onKeyDown] = useGameLoop({ gridSetter: setColourGrid, scoreDispatch: scoreDispatch, tickRate: 1000 })
     return (
         <div className={styles.game} onKeyDown={onKeyDown} tabIndex={0}>
             <CellGrid rows={18} cols={10} defaultColor={0} colorGrid={colourGrid} />

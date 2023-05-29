@@ -1,16 +1,26 @@
+import { Dispatch } from "react";
 import { cellGrid } from "../cellGrid";
-import { FixedShapesActionType } from "../reducerHooks/fixedShapes";
-import { ShapeActionType } from "../reducerHooks/liveShape";
-import { TickType } from "../reducerHooks/tick";
+import { FixedShapesActionType, IFixedShapesAction } from "../reducerHooks/fixedShapes";
+import { IShapeAction, ShapeActionType } from "../reducerHooks/liveShape";
+import { ITickAction, TickType } from "../reducerHooks/tick";
+import { IShape } from "../shapeFactory";
 import { IBuildMergedGridProps } from "./IMergedGrid";
+import { IScoreAction } from "../reducerHooks/score";
 
-export const isStaticGridCollision = (props: { mergeProps: IBuildMergedGridProps, baseGrid: cellGrid }) => {
-    const { mergeProps: { shapey, shapex, liveShape }, baseGrid } = props;
+export interface IIsStaticGridCollisionProps {
+    shapey: number,
+    shapex: number,
+    liveShape?: IShape,
+    staticGrid: cellGrid,
+}
+
+export const isStaticGridCollision = (props: IIsStaticGridCollisionProps) => {
+    const { shapey, shapex, liveShape, staticGrid } = props;
     let collisionDetected = false
     if (liveShape) {
         liveShape.rotatingCoordinates[liveShape.rotationIndex].forEach((coordinate) => {
-            if (baseGrid[shapey + coordinate.y] != undefined && baseGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
-                if (baseGrid[shapey + coordinate.y][shapex + coordinate.x] != 0) {
+            if (staticGrid[shapey + coordinate.y] != undefined && staticGrid[shapey + coordinate.y][shapex + coordinate.x] != undefined) {
+                if (staticGrid[shapey + coordinate.y][shapex + coordinate.x] != 0) {
                     collisionDetected = true
                 }
             }
@@ -19,14 +29,23 @@ export const isStaticGridCollision = (props: { mergeProps: IBuildMergedGridProps
     return collisionDetected;
 }
 
-export const handleStaticGridCollision = (props: IBuildMergedGridProps) => {
-    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch: scoreDespatch } = props;
+export interface IHandleStaticGridCollisionProps {
+    shapey: number,
+    shapex: number,
+    liveShape?: IShape,
+    fixedShapesDispatch: Dispatch<IFixedShapesAction>,
+    tickDispatch: Dispatch<ITickAction>,
+    liveShapeDispatch: Dispatch<IShapeAction>,
+    scoreDispatch: Dispatch<IScoreAction>,
+}
+export const handleStaticGridCollision = (props: IHandleStaticGridCollisionProps) => {
+    const { shapey, shapex, liveShape, fixedShapesDispatch, tickDispatch, liveShapeDispatch, scoreDispatch } = props;
     fixedShapesDispatch({
         type: FixedShapesActionType.add, payload: {
             shape: liveShape!,
             x: shapex,
             y: shapey - 1,
-            scoreDespatch
+            scoreDispatch
         }
     })
     tickDispatch({ type: TickType.reset })
