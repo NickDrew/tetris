@@ -26,7 +26,6 @@ describe('fixedShapeReducer', () => {
                 shape: {
                     rotatingCoordinates: [[{ x: 0, y: 0 }, { x: 0, y: 1 }]],
                     rotationIndex: 0,
-                    baseOffset: 0,
                 },
                 x: 0,
                 y: 0,
@@ -54,7 +53,6 @@ describe('fixedShapeReducer', () => {
                 shape: {
                     rotatingCoordinates: [[{ x: 0, y: -1 }, { x: 0, y: 0 }]],
                     rotationIndex: 0,
-                    baseOffset: 0,
                 },
                 x: 0,
                 y: 0,
@@ -83,7 +81,6 @@ describe('fixedShapeReducer', () => {
                 shape: {
                     rotatingCoordinates: [[{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }]],
                     rotationIndex: 0,
-                    baseOffset: 0,
                 },
                 x: 0,
                 y: 0,

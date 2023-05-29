@@ -27,7 +27,6 @@ describe("isGridBottomCollisions", () => {
             liveShape: {
                 rotatingCoordinates: [[{ x: 1, y: 1 }]],
                 rotationIndex: 0,
-                baseOffset: 0
             },
             shapex: 0,
             shapey: 0,
@@ -74,7 +73,6 @@ describe("handleGridBottomCollisions", () => {
             liveShape: {
                 rotatingCoordinates: [[{ x: 1, y: 1 }]],
                 rotationIndex: 0,
-                baseOffset: 0
             },
             shapex: 0,
             shapey: 0,

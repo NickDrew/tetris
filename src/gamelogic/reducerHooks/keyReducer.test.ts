@@ -30,7 +30,6 @@ describe("keyReducer", () => {
                 liveShape: {
                     rotatingCoordinates: [[{ x: 1, y: 1 }]],
                     rotationIndex: 0,
-                    baseOffset: 0
                 },
                 fixedShapes: buildBaseGrid(),
                 shapey: 0,

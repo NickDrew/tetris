@@ -9,7 +9,6 @@ describe("isCollisionLeft", () => {
             liveShape: {
                 rotatingCoordinates: [[{ x: 0, y: 0 }]],
                 rotationIndex: 0,
-                baseOffset: 0
             },
             fixedShapes: buildBaseGrid(),
             shapex: 0,
@@ -37,7 +36,6 @@ describe("isCollisionRight", () => {
             liveShape: {
                 rotatingCoordinates: [[{ x: 1, y: 0 }]],
                 rotationIndex: 0,
-                baseOffset: 0
             },
             fixedShapes: buildBaseGrid(),
             shapex: 8,

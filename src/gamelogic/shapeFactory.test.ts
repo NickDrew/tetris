@@ -9,7 +9,6 @@ describe("randomShape", () => {
     test("Should generate a shape 'randomly'", () => {
         expect(randomShape()).toEqual(
             {
-                "baseOffset": 1,
                 "rotatingCoordinates": [
                     [
                         { x: 0, y: -2 },
@@ -44,11 +43,11 @@ describe("randomShape", () => {
 
 describe("rotateShape", () => {
     test("Should rotate a shape correctly", () => {
-        const shape: IShape = { rotatingCoordinates: [[], [], []], rotationIndex: 0, baseOffset: 0 }
+        const shape: IShape = { rotatingCoordinates: [[], [], []], rotationIndex: 0, }
         expect(rotateShape(shape).rotationIndex).toEqual(1);
     })
     test("Should rotate a shape with its index at the end of its coordinate array correctly", () => {
-        const shape: IShape = { rotatingCoordinates: [[], [], []], rotationIndex: 2, baseOffset: 0 }
+        const shape: IShape = { rotatingCoordinates: [[], [], []], rotationIndex: 2, }
 
         expect(rotateShape(shape).rotationIndex).toEqual(0);
     })
@@ -59,7 +58,6 @@ describe("Shapes", () => {
         expect(Shapes).toMatchInlineSnapshot(`
 [
   {
-    "baseOffset": 1,
     "rotatingCoordinates": [
       [
         {
@@ -137,7 +135,6 @@ describe("Shapes", () => {
     "rotationIndex": 0,
   },
   {
-    "baseOffset": 0,
     "rotatingCoordinates": [
       [
         {
@@ -215,7 +212,6 @@ describe("Shapes", () => {
     "rotationIndex": 0,
   },
   {
-    "baseOffset": 0,
     "rotatingCoordinates": [
       [
         {
@@ -293,7 +289,6 @@ describe("Shapes", () => {
     "rotationIndex": 0,
   },
   {
-    "baseOffset": 0,
     "rotatingCoordinates": [
       [
         {
@@ -317,7 +312,6 @@ describe("Shapes", () => {
     "rotationIndex": 0,
   },
   {
-    "baseOffset": 0,
     "rotatingCoordinates": [
       [
         {
@@ -395,7 +389,6 @@ describe("Shapes", () => {
     "rotationIndex": 0,
   },
   {
-    "baseOffset": 0,
     "rotatingCoordinates": [
       [
         {
@@ -473,7 +466,6 @@ describe("Shapes", () => {
     "rotationIndex": 0,
   },
   {
-    "baseOffset": 0,
     "rotatingCoordinates": [
       [
         {

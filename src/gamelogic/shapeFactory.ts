@@ -5,7 +5,6 @@ export interface ICoordinate {
 export interface IShape {
     rotatingCoordinates: ICoordinate[][]
     rotationIndex: number;
-    baseOffset: number
 }
 
 
@@ -40,7 +39,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 1
     },
     {
         //L piece
@@ -71,7 +69,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 0
     },
     {
         //Reverse L piece
@@ -102,7 +99,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 0
     },
     {
         //Square piece
@@ -115,7 +111,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 0
     },
     {
         //Z piece
@@ -146,7 +141,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 0
     },
     {
         //Reverse Z piece
@@ -177,7 +171,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 0
     },
     {
         //T piece
@@ -208,7 +201,6 @@ export const Shapes: IShape[] = [
             ],
         ],
         rotationIndex: 0,
-        baseOffset: 0
     },
 ];
 

@@ -34,7 +34,6 @@ describe("buildMergedGrid", () => {
             liveShape: {
                 rotatingCoordinates: [[{ x: 1, y: 1 }]],
                 rotationIndex: 0,
-                baseOffset: 0
             },
             staticGrid: buildBaseGrid(),
             fixedShapesDispatch: mockfixedShapeDispatch,
