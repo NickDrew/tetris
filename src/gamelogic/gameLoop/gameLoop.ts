@@ -1,62 +1,61 @@
-import { Dispatch, useEffect, useReducer } from "react"
-import { buildMergedGrid } from "../mergedGrid/mergedGrid"
-import { IShape, randomShape, } from "../shapeFactory"
-import { buildBaseGrid, cellGrid } from "../cellGrid"
-import { fixedShapeReducer } from "../reducerHooks/fixedShapes"
-import { TickType, tickReducer } from "../reducerHooks/tick"
-import { shapeReducer, ShapeActionType } from "../reducerHooks/liveShape"
-import { IScoreAction } from "../reducerHooks/score"
-import { isCollisionLeft, isCollisionRight } from "./horizontalCollision"
-import { keyReducer } from "../reducerHooks/keyReducer"
-
+import { type Dispatch, useEffect, useReducer } from 'react'
+import { buildMergedGrid } from '../mergedGrid/mergedGrid'
+import { randomShape } from '../shapeFactory'
+import { buildBaseGrid, type cellGrid } from '../cellGrid'
+import { fixedShapeReducer } from '../reducerHooks/fixedShapes'
+import { TickType, tickReducer } from '../reducerHooks/tick'
+import { shapeReducer } from '../reducerHooks/liveShape'
+import { type IScoreAction } from '../reducerHooks/score'
+import { keyReducer } from '../reducerHooks/keyReducer'
 
 export interface IUseGameLoopProps {
-    gridSetter: Dispatch<cellGrid>
-    scoreDispatch: Dispatch<IScoreAction>
-    tickRate: number
+  gridSetter: Dispatch<cellGrid>
+  scoreDispatch: Dispatch<IScoreAction>
+  tickRate: number
 }
 
-export const useGameLoop = (props: IUseGameLoopProps) => {
-    const { gridSetter, tickRate, scoreDispatch } = props
-    const initialTick = 0
-    const initialXOffset = 4
+export type onKeyDownFunc = (event: React.KeyboardEvent) => void
 
-    const initalShape = randomShape()
-    const initialFixedShapes = buildBaseGrid()
+export const useGameLoop = (props: IUseGameLoopProps): [onKeyDownFunc] => {
+  const { gridSetter, tickRate, scoreDispatch } = props
+  const initialTick = 0
+  const initialXOffset = 4
 
-    //Game tick
-    const [tick, tickDispatch] = useReducer(tickReducer, initialTick);
-    useEffect(() => {
-        setInterval(() => {
-            tickDispatch({ type: TickType.tick })
-        }, tickRate)
+  const initalShape = randomShape()
+  const initialFixedShapes = buildBaseGrid()
 
-    }, [])
+  // Game tick
+  const [tick, tickDispatch] = useReducer(tickReducer, initialTick)
+  useEffect(() => {
+    setInterval(() => {
+      tickDispatch({ type: TickType.tick })
+    }, tickRate)
+  }, [])
 
-    //The live shape controlled by the player
-    const [liveShape, liveShapeDispatch] = useReducer(shapeReducer, initalShape)
+  // The live shape controlled by the player
+  const [liveShape, liveShapeDispatch] = useReducer(shapeReducer, initalShape)
 
-    //The fixed shapes locked in place after bottom contact
-    const [fixedShapes, fixedShapesDispatch] = useReducer(fixedShapeReducer, initialFixedShapes)
+  // The fixed shapes locked in place after bottom contact
+  const [fixedShapes, fixedShapesDispatch] = useReducer(fixedShapeReducer, initialFixedShapes)
 
-    //Player interaction
-    const [xoffset, xoffsetDispatch] = useReducer(keyReducer, initialXOffset)
-    function onKeyDown(event: React.KeyboardEvent) {
-        xoffsetDispatch({
-            event, payload: {
-                liveShape,
-                liveShapeDispatch,
-                shapey: tick,
-                tickDispatch,
-                fixedShapes,
-            }
-        })
-    }
-    //Build the grid
-    useEffect(() => {
-        gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch, scoreDispatch: scoreDispatch }))
-    }, [tick, xoffset, liveShape, fixedShapes])
+  // Player interaction
+  const [xoffset, xoffsetDispatch] = useReducer(keyReducer, initialXOffset)
+  function onKeyDown (event: React.KeyboardEvent): void {
+    xoffsetDispatch({
+      event,
+      payload: {
+        liveShape,
+        liveShapeDispatch,
+        shapey: tick,
+        tickDispatch,
+        fixedShapes
+      }
+    })
+  }
+  // Build the grid
+  useEffect(() => {
+    gridSetter(buildMergedGrid({ shapey: tick, shapex: xoffset, liveShape, liveShapeDispatch, staticGrid: fixedShapes, fixedShapesDispatch, tickDispatch, scoreDispatch }))
+  }, [tick, xoffset, liveShape, fixedShapes])
 
-
-    return [onKeyDown]
+  return [onKeyDown]
 }

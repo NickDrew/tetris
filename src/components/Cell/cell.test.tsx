@@ -1,11 +1,10 @@
-import { render, } from '@testing-library/react'
+import { render } from '@testing-library/react'
+import React from 'react'
+import { Cell } from './Cell'
 
-import { Cell } from "./Cell"
-
-
-describe("Cell", () => {
-    test("Should render as expected", () => {
-        expect(render(<Cell color={1} />).baseElement).toMatchInlineSnapshot(`
+describe('Cell', () => {
+  test('Should render as expected', () => {
+    expect(render(<Cell color={1} />).baseElement).toMatchInlineSnapshot(`
 <body>
   <div>
     <div
@@ -14,5 +13,5 @@ describe("Cell", () => {
   </div>
 </body>
 `)
-    })
+  })
 })

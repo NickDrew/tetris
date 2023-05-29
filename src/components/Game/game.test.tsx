@@ -1,14 +1,14 @@
-import { render } from "@testing-library/react";
-import { Game } from "./Game";
+import { render } from '@testing-library/react'
+import { Game } from './Game'
+import React from 'react'
 
+describe('Game', () => {
+  beforeEach(() => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789)
+  })
 
-describe("Game", () => {
-    beforeEach(() => {
-        jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
-    });
-
-    test("Should render as expected", () => {
-        expect(render(<Game />).baseElement).toMatchInlineSnapshot(`
+  test('Should render as expected', () => {
+    expect(render(<Game />).baseElement).toMatchInlineSnapshot(`
 <body>
   <div>
     <div
@@ -577,5 +577,5 @@ describe("Game", () => {
   </div>
 </body>
 `)
-    })
+  })
 })

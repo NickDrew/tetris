@@ -1,2 +1,2 @@
-export { buildMergedGrid } from "./mergedGrid"
-export type { IBuildMergedGridProps } from "./IMergedGrid"
+export { buildMergedGrid } from './mergedGrid'
+export type { IBuildMergedGridProps } from './IMergedGrid'

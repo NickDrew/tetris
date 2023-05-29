@@ -1,12 +1,11 @@
 
-import { render, } from '@testing-library/react'
+import { render } from '@testing-library/react'
+import React from 'react'
+import { Scoreboard } from './Scoreboard'
 
-import { Scoreboard } from "./Scoreboard"
-
-
-describe("Scoreboard", () => {
-    test("Should render as expected", () => {
-        expect(render(<Scoreboard score={1} />).baseElement).toMatchInlineSnapshot(`
+describe('Scoreboard', () => {
+  test('Should render as expected', () => {
+    expect(render(<Scoreboard score={1} />).baseElement).toMatchInlineSnapshot(`
 <body>
   <div>
     <div
@@ -26,5 +25,5 @@ describe("Scoreboard", () => {
   </div>
 </body>
 `)
-    })
+  })
 })

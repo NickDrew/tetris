@@ -1,8 +1,8 @@
-import { buildBaseGrid } from "./cellGrid"
+import { buildBaseGrid } from './cellGrid'
 
-describe("buildBaseGrid", () => {
-    test("Builds an empty grid as expected", () => {
-        expect(buildBaseGrid()).toMatchInlineSnapshot(`
+describe('buildBaseGrid', () => {
+  test('Builds an empty grid as expected', () => {
+    expect(buildBaseGrid()).toMatchInlineSnapshot(`
 [
   [
     0,
@@ -222,5 +222,5 @@ describe("buildBaseGrid", () => {
   ],
 ]
 `)
-    })
+  })
 })

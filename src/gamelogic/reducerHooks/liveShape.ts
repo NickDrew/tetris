@@ -1,21 +1,21 @@
-import { IShape, randomShape, rotateShape } from "../shapeFactory"
+import { type IShape, randomShape, rotateShape } from '../shapeFactory'
 
 export enum ShapeActionType {
-    rotate,
-    randomise
+  rotate,
+  randomise
 }
 
 export interface IShapeAction {
-    type: ShapeActionType
+  type: ShapeActionType
 }
 
 export const shapeReducer = (state: IShape, action: IShapeAction): IShape => {
-    switch (action.type) {
-        case ShapeActionType.rotate:
-            return rotateShape(state)
-        case ShapeActionType.randomise:
-            const shape = randomShape();
-            shape.rotationIndex = 0;
-            return shape;
-    }
+  const shape = randomShape()
+  switch (action.type) {
+    case ShapeActionType.rotate:
+      return rotateShape(state)
+    case ShapeActionType.randomise:
+      shape.rotationIndex = 0
+      return shape
+  }
 }
