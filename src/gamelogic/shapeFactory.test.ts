@@ -3,6 +3,7 @@ import { IShape, randomShape, rotateShape, Shapes } from "./shapeFactory"
 
 describe("randomShape", () => {
     beforeEach(() => {
+        //Lets have no random in the tests!
         jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
     });
     test("Should generate a shape 'randomly'", () => {

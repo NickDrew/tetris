@@ -3,7 +3,7 @@ import { IShape } from "../shapeFactory";
 
 
 
-interface IIsCollisionProps {
+export interface IIsCollisionProps {
     liveShape: IShape,
     fixedShapes: cellGrid,
     shapey: number,
