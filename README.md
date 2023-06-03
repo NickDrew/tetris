@@ -8,7 +8,7 @@ I'm not sure if I would tackle this the exact same way a second time. Some probl
 * The ahead-of-loop check for collisions with the bottom of the grid create some edge cases where the tetris blocks can't be swung under other shapes.
 * Rather than writing a true rotational algo I short-cut it with multiple hardcoded templates for each shape. Pragmatic, but not as much fun!
 * It's possible to rotate a shape out of the edge of the grid, so I probably need some checks against the grid borders when rotating.
-* Adding levels that speed up the game would be a pain as I have used the game 'tick' number as a double for the x coordinate.
+* Adding levels that speed up the game would be a pain as I have used the game 'tick' number as a double for the y coordinate.
 
 ```
 npm run build               # compile the application
