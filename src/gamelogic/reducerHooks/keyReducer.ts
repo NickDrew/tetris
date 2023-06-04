@@ -4,7 +4,7 @@ import { type IShape } from '../shapeFactory'
 import { type cellGrid } from '../cellGrid'
 import { type IShapeAction, ShapeActionType } from './liveShape'
 import { type ITickAction, TickType } from './tick'
-import { isCollisionLeft, isCollisionRight } from '../gameLoop/horizontalCollision'
+import { isCollisionLeft, isCollisionRight } from '../horizontalCollision'
 
 export interface IKeyAction {
   event: React.KeyboardEvent

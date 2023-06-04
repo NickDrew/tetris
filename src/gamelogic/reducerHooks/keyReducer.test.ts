@@ -3,7 +3,7 @@ import { type IKeyAction, keyReducer } from './keyReducer'
 import { type IShapeAction } from './liveShape'
 import { type ITickAction } from './tick'
 import { buildBaseGrid } from '../cellGrid'
-import * as collisionChecks from '../gameLoop/horizontalCollision'
+import * as collisionChecks from '../horizontalCollision'
 
 describe('keyReducer', () => {
   let props: IKeyAction

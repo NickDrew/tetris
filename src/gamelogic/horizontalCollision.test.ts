@@ -1,4 +1,4 @@
-import { buildBaseGrid } from '../cellGrid'
+import { buildBaseGrid } from './cellGrid'
 import { type IIsCollisionProps, isCollisionLeft, isCollisionRight } from './horizontalCollision'
 
 describe('isCollisionLeft', () => {

@@ -1,5 +1,5 @@
-import { type cellGrid } from '../cellGrid'
-import { type IShape } from '../shapeFactory'
+import { type cellGrid } from './cellGrid'
+import { type IShape } from './shapeFactory'
 
 export interface IIsCollisionProps {
   liveShape: IShape

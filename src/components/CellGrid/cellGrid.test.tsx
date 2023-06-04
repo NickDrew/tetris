@@ -5,7 +5,7 @@ import { CellGrid } from './CellGrid'
 
 describe('CellGrid', () => {
   test('Should render as expected', () => {
-    expect(render(<CellGrid rows={2} cols={3} defaultColor={1} colorGrid={[[0, 0, 0], []]} />).baseElement).toMatchInlineSnapshot(`
+    expect(render(<CellGrid rows={2} cols={3} defaultColor={1} colorGrid={[[0, 0, 0], [0, 0, 0]]} />).baseElement).toMatchInlineSnapshot(`
 <body>
   <div>
     <div
