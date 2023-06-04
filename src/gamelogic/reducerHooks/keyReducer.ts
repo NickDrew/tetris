@@ -28,7 +28,7 @@ export const keyReducer = (state: number, action: IKeyAction): number => {
       return isCollisionLeft({ liveShape, fixedShapes, shapex: state, shapey }) ? state : state - 1
     case 'ArrowUp':
       event.preventDefault()
-      liveShapeDispatch({ type: ShapeActionType.rotate })
+      liveShapeDispatch({ type: ShapeActionType.rotate, payload: { fixedShapes, shapex: state, shapey } })
       return state
     case 'ArrowDown':
       event.preventDefault()
