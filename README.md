@@ -1,6 +1,8 @@
 # tetris
 A simple tetris game in react.
 
+![tetris](tetris.png)
+
 I wanted to do a deep dive into how React hooks manage references under complex scenarios, so setup a system with a game loop that would re-run paints every second.
 I had so much fun I decided to polish it a bit with some refactoring and tests (not so much fun!)
 
